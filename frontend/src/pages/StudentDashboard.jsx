@@ -78,7 +78,7 @@ function StudentDashboard() {
               📍 {event.venue}
             </p>
 
-            <button className="w-full bg-blue-600 hover:bg-blue-700 py-2 rounded-lg">
+            <button className="bg-slate-900 border border-slate-800 rounded-xl p-6 hover:border-blue-500 hover:-translate-y-1 transition-all duration-300">
               Register
             </button>
           </div>
