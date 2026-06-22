@@ -1,46 +1,76 @@
 function Login() {
   return (
-    <div
-      style={{
-        maxWidth: "400px",
-        margin: "50px auto",
-      }}
-    >
-      <h1>Login</h1>
+    <div className="min-h-screen bg-slate-950 flex items-center justify-center px-4">
+      <div className="w-full max-w-md bg-slate-900 border border-slate-800 rounded-2xl p-8 shadow-xl">
 
-      <form>
-        <div>
-          <label>Email</label>
-          <br />
-          <input type="email" />
-        </div>
+        <h1 className="text-4xl font-bold text-center text-white mb-2">
+          Welcome Back
+        </h1>
 
-        <br />
+        <p className="text-slate-400 text-center mb-8">
+          Login to EventSphere
+        </p>
 
-        <div>
-          <label>Password</label>
-          <br />
-          <input type="password" />
-        </div>
+        <form className="space-y-5">
 
-        <br />
+          <div>
+            <label className="block text-slate-300 mb-2">
+              Email
+            </label>
 
-        <div>
-          <label>Role</label>
-          <br />
-          <select>
-            <option>Student</option>
-            <option>Organizer</option>
-            <option>Admin</option>
-          </select>
-        </div>
+            <input
+              type="email"
+              placeholder="Enter your email"
+              className="w-full px-4 py-3 rounded-lg bg-slate-800 border border-slate-700 text-white focus:outline-none focus:border-blue-500"
+            />
+          </div>
 
-        <br />
+          <div>
+            <label className="block text-slate-300 mb-2">
+              Password
+            </label>
 
-        <button type="submit">
-          Login
-        </button>
-      </form>
+            <input
+              type="password"
+              placeholder="Enter your password"
+              className="w-full px-4 py-3 rounded-lg bg-slate-800 border border-slate-700 text-white focus:outline-none focus:border-blue-500"
+            />
+          </div>
+
+          <div>
+            <label className="block text-slate-300 mb-2">
+              Role
+            </label>
+
+            <select
+              className="w-full px-4 py-3 rounded-lg bg-slate-800 border border-slate-700 text-white focus:outline-none focus:border-blue-500"
+            >
+              <option>Student</option>
+              <option>Organizer</option>
+              <option>Admin</option>
+            </select>
+          </div>
+
+          <button
+            type="submit"
+            className="w-full bg-blue-600 hover:bg-blue-700 transition py-3 rounded-lg text-white font-semibold"
+          >
+            Login
+          </button>
+
+        </form>
+
+        <p className="text-center text-slate-400 mt-6">
+          Don't have an account?{" "}
+          <a
+            href="/register"
+            className="text-blue-500 hover:text-blue-400"
+          >
+            Register
+          </a>
+        </p>
+
+      </div>
     </div>
   );
 }

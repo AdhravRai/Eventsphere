@@ -87,7 +87,7 @@ function Home() {
             </p>
           </div>
 
-          <div className="bg-slate-900 p-6 rounded-xl border border-slate-800">
+          <div className="bg-slate-900 p-6 rounded-xl border border-slate-800 hover:border-blue-500 hover:-translate-y-2 transition-all duration-300">
             <h3 className="text-xl font-bold mb-3">
               Certificates
             </h3>
