@@ -7,6 +7,13 @@ const eventSchema = new mongoose.Schema(
       required: true,
     },
 
+  attendees: [
+  {
+    student: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    present: { type: Boolean, default: false },
+  },
+],
+
     description: {
       type: String,
       required: true,
