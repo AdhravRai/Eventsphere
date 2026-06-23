@@ -1,4 +1,50 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 function Login() {
+  const navigate = useNavigate();
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
+    setLoading(true);
+
+    try {
+      const res = await fetch("http://localhost:5000/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await res.json();
+
+      if (!data.success) {
+        setError(data.message || "Login failed");
+        setLoading(false);
+        return;
+      }
+
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("user", JSON.stringify(data.user));
+
+      if (data.user.role === "admin") {
+        navigate("/admin-dashboard");
+      } else if (data.user.role === "organizer") {
+        navigate("/organizer-dashboard");
+      } else {
+        navigate("/student-dashboard");
+      }
+    } catch (err) {
+      setError("Could not connect to server");
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-slate-950 flex items-center justify-center px-4">
       <div className="w-full max-w-md bg-slate-900 border border-slate-800 rounded-2xl p-8 shadow-xl">
@@ -11,7 +57,11 @@ function Login() {
           Login to EventSphere
         </p>
 
-        <form className="space-y-5">
+        {error && (
+          <p className="text-red-400 text-center mb-4">{error}</p>
+        )}
+
+        <form className="space-y-5" onSubmit={handleSubmit}>
 
           <div>
             <label className="block text-slate-300 mb-2">
@@ -21,6 +71,9 @@ function Login() {
             <input
               type="email"
               placeholder="Enter your email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
               className="w-full px-4 py-3 rounded-lg bg-slate-800 border border-slate-700 text-white focus:outline-none focus:border-blue-500"
             />
           </div>
@@ -33,29 +86,19 @@ function Login() {
             <input
               type="password"
               placeholder="Enter your password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
               className="w-full px-4 py-3 rounded-lg bg-slate-800 border border-slate-700 text-white focus:outline-none focus:border-blue-500"
             />
           </div>
 
-          <div>
-            <label className="block text-slate-300 mb-2">
-              Role
-            </label>
-
-            <select
-              className="w-full px-4 py-3 rounded-lg bg-slate-800 border border-slate-700 text-white focus:outline-none focus:border-blue-500"
-            >
-              <option>Student</option>
-              <option>Organizer</option>
-              <option>Admin</option>
-            </select>
-          </div>
-
           <button
             type="submit"
-            className="w-full bg-blue-600 hover:bg-blue-700 transition py-3 rounded-lg text-white font-semibold"
+            disabled={loading}
+            className="w-full bg-blue-600 hover:bg-blue-700 transition py-3 rounded-lg text-white font-semibold disabled:opacity-50"
           >
-            Login
+            {loading ? "Logging in..." : "Login"}
           </button>
 
         </form>
