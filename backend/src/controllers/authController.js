@@ -1,7 +1,7 @@
-const User = require("../models/User");
-const generateToken = require("../utils/generateToken");
+import User from "../models/User.js";
+import generateToken from "../utils/generateToken.js";
 
-const register = async (req, res) => {
+export const register = async (req, res) => {
   try {
     const { name, email, password, role } = req.body;
 
@@ -64,8 +64,7 @@ const register = async (req, res) => {
   }
 };
 
-
-const login = async (req, res) => {
+export const login = async (req, res) => {
   try {
     const { email, password } = req.body;
 
@@ -119,9 +118,4 @@ const login = async (req, res) => {
       message: "Internal server error",
     });
   }
-};
-
-module.exports = { 
-    register,
-    login
 };

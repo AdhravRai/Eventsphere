@@ -1,7 +1,7 @@
-const jwt = require("jsonwebtoken");
-const User = require("../models/User");
+import jwt from "jsonwebtoken";
+import User from "../models/User.js";
 
-const protect = async (req, res, next) => {
+export const protect = async (req, res, next) => {
   try {
     const authHeader = req.headers.authorization;
 
@@ -39,7 +39,6 @@ const protect = async (req, res, next) => {
 
     // Attach user to request object
     req.user = user;
-
     next();
   } catch (err) {
     return res.status(500).json({
@@ -48,5 +47,3 @@ const protect = async (req, res, next) => {
     });
   }
 };
-
-module.exports = { protect };

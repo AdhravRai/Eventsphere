@@ -1,4 +1,4 @@
-import Event from "../models/Event.js";
+import Event from "../models/event.js";
 
 
 // CREATE EVENT
@@ -137,19 +137,19 @@ export const markAttendance = async (req, res) => {
   }
 };
 
-export const approveEvent = async (req, res) => {
-  try {
-    const event = await Event.findByIdAndUpdate(
-      req.params.id,
-      { status: "Approved" },
-      { new: true }
-    );
-    if (!event) return res.status(404).json({ message: "Event not found" });
-    res.status(200).json(event);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-};
+// export const approveEvent = async (req, res) => {
+//   try {
+//     const event = await Event.findByIdAndUpdate(
+//       req.params.id,
+//       { status: "Approved" },
+//       { new: true }
+//     );
+//     if (!event) return res.status(404).json({ message: "Event not found" });
+//     res.status(200).json(event);
+//   } catch (error) {
+//     res.status(500).json({ message: error.message });
+//   }
+// };
 
 // Add approve/reject controller 
 export const approveEvent = async (req, res) => {
