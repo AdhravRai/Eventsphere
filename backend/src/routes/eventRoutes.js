@@ -1,7 +1,9 @@
 import express from "express";
 import { isAdmin } from "../middleware/adminMiddleware.js";
 import { approveEvent, rejectEvent, getPendingEvents } from "../controllers/eventController.js";
+import { markAttendance } from "../controllers/eventController.js";
 
+router.put("/:id/attendance", protect, isAdmin, markAttendance);
 router.get("/pending", protect, isAdmin, getPendingEvents);
 router.put("/:id/approve", protect, isAdmin, approveEvent);
 router.put("/:id/reject", protect, isAdmin, rejectEvent);
