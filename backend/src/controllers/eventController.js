@@ -115,6 +115,28 @@ export const deleteEvent = async (req, res) => {
   }
 };
 
+export const markAttendance = async (req, res) => {
+  try {
+    const event = await Event.findById(req.params.id);
+    if (!event) return res.status(404).json({ message: "Event not found" });
+
+    const attendee = event.attendees.find(
+      (a) => a.student.toString() === req.body.studentId
+    );
+
+    if (attendee) {
+      attendee.present = true;
+    } else {
+      event.attendees.push({ student: req.body.studentId, present: true });
+    }
+
+    await event.save();
+    res.status(200).json({ message: "Attendance marked", event });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 export const approveEvent = async (req, res) => {
   try {
     const event = await Event.findByIdAndUpdate(
