@@ -20,6 +20,24 @@ function AdminDashboard() {
     },
   ];
 
+  const approvedEvents = [
+  {
+    id: 1,
+    title: "Hackathon 2026",
+    students: [
+      { id: "s1", name: "Riya Sharma", present: false },
+      { id: "s2", name: "Karan Verma", present: false },
+    ],
+  },
+  {
+    id: 2,
+    title: "AI Workshop",
+    students: [
+      { id: "s3", name: "Ananya Singh", present: false },
+    ],
+  },
+];
+
   return (
     <div className="min-h-screen bg-slate-950 text-white p-8">
 
@@ -111,6 +129,8 @@ function AdminDashboard() {
       </div>
 
     </div>
+
+    
   );
 }
 
