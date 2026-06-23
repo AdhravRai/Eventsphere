@@ -17,11 +17,14 @@ const router = express.Router();
 
 router.post("/", protect, createEvent);
 router.get("/", getAllEvents);
+
+// Specific routes MUST come before "/:id" or Express will treat them as an id
+router.get("/pending", protect, isAdmin, getPendingEvents);
+
 router.get("/:id", getEventById);
 router.put("/:id", protect, updateEvent);
 router.delete("/:id", protect, deleteEvent);
 
-router.get("/pending", protect, isAdmin, getPendingEvents);
 router.put("/:id/approve", protect, isAdmin, approveEvent);
 router.put("/:id/reject", protect, isAdmin, rejectEvent);
 router.put("/:id/attendance", protect, isAdmin, markAttendance);
