@@ -43,10 +43,10 @@ Traditional college event management often relies on fragmented tools such as Go
 
 | Member                    | Contribution                                         |
 | ------------------------- | ---------------------------------------------------- |
-| **Vipin Kumar (Founder)** | Team Lead, Project Coordination                      |
-| **Akash Sikarwar**        | Frontend Development, UI/UX                          |
-| **Adhrav Rai**            | Backend Development                                  |
-| **Divit Razdan**          | Backend Development, API Design, Database Management |
+| **Vipin Kumar**           | Team Lead, Project Frontend Development and UI/UX    |
+| **Akash Sikarwar**        | Admin Dashboard, API Design, Database Management     |
+| **Adhrav Rai**            | Backend Development Lead                             |
+| **Divit Razdan**          | Event Management and Technical Documentation Lead    |
 
 ---
 
