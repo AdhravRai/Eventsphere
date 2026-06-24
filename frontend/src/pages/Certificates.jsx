@@ -1,7 +1,6 @@
 
 import Sidebar from "../components/Sidebar";
-import Topbar from "../components/Topbar";
-import jsPDF from "jspdf";
+import TopBar from "../components/TopBar";
 
 import {
   FaCertificate,

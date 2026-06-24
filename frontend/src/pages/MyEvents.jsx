@@ -1,5 +1,5 @@
 import Sidebar from "../components/Sidebar";
-import Topbar from "../components/Topbar";
+import TopBar from "../components/TopBar";
 import { FaCheckCircle, FaCalendarAlt, FaArrowRight } from "react-icons/fa";
 
 function MyEvents() {
