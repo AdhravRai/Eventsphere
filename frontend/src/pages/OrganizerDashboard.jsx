@@ -76,7 +76,35 @@ const fetchEvents = async () => {
     console.log(err);
   }
 };
+const markAttendance = async (
+  eventId,
+  studentId
+) => {
+  try {
+    const token = localStorage.getItem("token");
 
+    const res = await api.put(
+      `/events/${eventId}/attendance`,
+      { studentId },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    alert(res.data.message);
+
+    fetchEvents();
+  } catch (error) {
+    console.log(error);
+
+    alert(
+      error.response?.data?.message ||
+      "Attendance failed"
+    );
+  }
+};
  
 return (
   <div className="flex min-h-screen bg-gradient-to-br from-slate-950 via-blue-950 to-slate-950 text-white">
@@ -85,7 +113,7 @@ return (
 
     <div className="flex-1 overflow-auto">
 
-      <Topbar />
+      <TopBar />
 
       <div className="p-8">
 
@@ -233,7 +261,7 @@ return (
 
           {myEvents.map((event) => (
             <div
-              key={event.id}
+              key={event._id}
               className="bg-slate-900/60 backdrop-blur-xl border border-slate-800 rounded-2xl p-6 hover:border-blue-500 hover:-translate-y-2 transition-all duration-300"
             >
 
@@ -272,6 +300,47 @@ return (
   <p>
     👥 Capacity: {event.capacity}
   </p>
+  
+  <div className="mt-4">
+  <h4 className="font-semibold mb-2">
+    Registered Students
+  </h4>
+
+  {event.attendees?.length === 0 ? (
+    <p className="text-slate-500">
+      No registrations yet
+    </p>
+  ) : (
+    event.attendees.map((attendee) => (
+      <div
+        key={attendee.student?._id}
+        className="flex justify-between items-center bg-slate-800 p-2 rounded-lg mb-2"
+      >
+        <span>
+          {attendee.student?.name}
+        </span>
+
+        {attendee.present ? (
+          <span className="text-green-400">
+            Present
+          </span>
+        ) : (
+          <button
+            onClick={() =>
+              markAttendance(
+                event._id,
+                attendee.student._id
+              )
+            }
+            className="bg-green-600 px-3 py-1 rounded-lg"
+          >
+            Mark Present
+          </button>
+        )}
+      </div>
+    ))
+  )}
+</div>
 
 </div>
 

@@ -79,7 +79,7 @@ const upcomingEvents = events.filter(
 
       <div className="flex-1 overflow-auto">
 
-        <Topbar />
+        <TopBar />
 
         <div className="p-8">
 
