@@ -1,4 +1,5 @@
 import Sidebar from "../components/Sidebar";
+import Topbar from "../components/Topbar";
 
 function StudentDashboard() {
   const events = [
@@ -25,9 +26,10 @@ function StudentDashboard() {
   return (
     <div className="flex min-h-screen bg-slate-950 text-white">
       <Sidebar />
+      
 
       <div className="flex-1 p-8 overflow-auto">
-
+        <Topbar />
         {/* Header */}
         <div className="mb-10">
           <h1 className="text-4xl font-bold">

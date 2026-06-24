@@ -1,4 +1,5 @@
 import Sidebar from "../components/Sidebar";
+import Topbar from "../components/Topbar";
 
 function OrganizerDashboard() {
   const myEvents = [
@@ -20,6 +21,7 @@ function OrganizerDashboard() {
       <Sidebar />
 
       <div className="flex-1 p-8">
+        <Topbar />
 
         <h1 className="text-4xl font-bold mb-8">
           Organizer Dashboard

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-
+import Footer from "../components/Footer";
 function Home() {
   return (
     <div className="min-h-screen bg-slate-950 text-white">
@@ -99,6 +99,7 @@ function Home() {
 
         </div>
       </section>
+      <Footer />
 
     </div>
   );

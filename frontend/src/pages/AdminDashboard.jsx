@@ -1,5 +1,5 @@
 import Sidebar from "../components/Sidebar";
-
+import Topbar from "../components/Topbar";
 function AdminDashboard() {
   const pendingEvents = [
     {
@@ -28,6 +28,7 @@ function AdminDashboard() {
       <Sidebar />
 
       <div className="flex-1 p-8 overflow-auto">
+        <Topbar />
 
         {/* Header */}
         <div className="mb-10">
