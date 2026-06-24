@@ -76,8 +76,10 @@ export const login = async (req, res) => {
       });
     }
 
-    // Find user by email and explicitly select password (select: false in schema)
+    // Find user by email
     const user = await User.findOne({ email }).select("+password");
+
+   
 
     // Return 401 if user not found
     if (!user) {
@@ -87,10 +89,10 @@ export const login = async (req, res) => {
       });
     }
 
-    // Compare password using instance method
+    // Compare password
     const isMatch = await user.comparePassword(password);
 
-    // Return 401 for invalid credentials
+      // Return 401 for invalid credentials
     if (!isMatch) {
       return res.status(401).json({
         success: false,
