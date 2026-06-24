@@ -1,6 +1,7 @@
 
 import Sidebar from "../components/Sidebar";
 import Topbar from "../components/Topbar";
+import jsPDF from "jspdf";
 
 import {
   FaCertificate,
@@ -21,7 +22,35 @@ function Certificates() {
       date: "28 June 2026",
     },
   ];
+  const downloadCertificate = (eventName) => {
+    const user = JSON.parse(localStorage.getItem("user"));
 
+    const doc = new jsPDF();
+
+    doc.setFontSize(22);
+    doc.text("Certificate of Participation", 35, 40);
+
+    doc.setFontSize(14);
+    doc.text(
+      `This certifies that ${user?.name || "Student"}`,
+      20,
+      70
+    );
+
+    doc.text(
+      `successfully participated in ${eventName}`,
+      20,
+      90
+    );
+
+    doc.text(
+      "Issued by EventSphere",
+      20,
+      120
+    );
+
+    doc.save(`${eventName}-certificate.pdf`);
+  };
   return (
     <div className="flex min-h-screen bg-gradient-to-br from-slate-950 via-blue-950 to-slate-950 text-white">
 
@@ -112,8 +141,12 @@ function Certificates() {
                   Issued on {certificate.date}
                 </p>
 
-                <button className="w-full py-3 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 flex items-center justify-center gap-2 hover:scale-[1.02] transition">
-
+                <button
+                  onClick={() =>
+                    downloadCertificate(certificate.event)
+                  }
+                  className="w-full py-3 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 flex items-center justify-center gap-2 hover:scale-[1.02] transition"
+                >
                   <FaDownload />
 
                   Download Certificate
