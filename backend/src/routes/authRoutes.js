@@ -1,8 +1,8 @@
-const express = require("express");
-const router = express.Router();
+import express from "express";
+import { register, login } from "../controllers/authController.js";
+import { protect } from "../middleware/authMiddleware.js";
 
-const { register,login } = require("../controllers/authController");
-const { protect } = require("../middleware/authMiddleware");
+const router = express.Router();
 
 // POST /api/auth/register
 router.post("/register", register);
@@ -10,10 +10,9 @@ router.post("/register", register);
 // POST /api/auth/login
 router.post("/login", login);
 
-// GET /api/auth/profile  — protected route
+// GET /api/auth/profile — protected route
 router.get("/profile", protect, (req, res) => {
   const { _id, name, email, role, createdAt, updatedAt } = req.user;
-
   return res.status(200).json({
     success: true,
     message: "Authenticated user profile",
@@ -28,4 +27,4 @@ router.get("/profile", protect, (req, res) => {
   });
 });
 
-module.exports = router;
+export default router;
