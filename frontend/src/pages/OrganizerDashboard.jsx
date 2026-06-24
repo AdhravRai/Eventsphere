@@ -1,3 +1,5 @@
+import Sidebar from "../components/Sidebar";
+
 function OrganizerDashboard() {
   const myEvents = [
     {
@@ -13,78 +15,82 @@ function OrganizerDashboard() {
   ];
 
   return (
-    <div className="min-h-screen bg-slate-950 text-white p-8">
+    <div className="flex min-h-screen bg-slate-950 text-white">
 
-      <h1 className="text-4xl font-bold mb-8">
-        Organizer Dashboard
-      </h1>
+      <Sidebar />
 
-      {/* Create Event Form */}
+      <div className="flex-1 p-8">
 
-      <div className="bg-slate-900 border border-slate-800 rounded-xl p-6 mb-10">
-        <h2 className="text-2xl font-bold mb-6">
-          Create New Event
-        </h2>
+        <h1 className="text-4xl font-bold mb-8">
+          Organizer Dashboard
+        </h1>
 
-        <div className="grid md:grid-cols-2 gap-4">
+        <div className="bg-slate-900 border border-slate-800 rounded-xl p-6 mb-10">
 
-          <input
-            type="text"
-            placeholder="Event Title"
-            className="bg-slate-800 p-3 rounded-lg"
+          <h2 className="text-2xl font-bold mb-6">
+            Create New Event
+          </h2>
+
+          <div className="grid md:grid-cols-2 gap-4">
+
+            <input
+              type="text"
+              placeholder="Event Title"
+              className="bg-slate-800 p-3 rounded-lg"
+            />
+
+            <input
+              type="date"
+              className="bg-slate-800 p-3 rounded-lg"
+            />
+
+            <input
+              type="text"
+              placeholder="Venue"
+              className="bg-slate-800 p-3 rounded-lg"
+            />
+
+            <input
+              type="text"
+              placeholder="Category"
+              className="bg-slate-800 p-3 rounded-lg"
+            />
+
+          </div>
+
+          <textarea
+            placeholder="Event Description"
+            className="bg-slate-800 p-3 rounded-lg w-full mt-4 h-32"
           />
 
-          <input
-            type="date"
-            className="bg-slate-800 p-3 rounded-lg"
-          />
-
-          <input
-            type="text"
-            placeholder="Venue"
-            className="bg-slate-800 p-3 rounded-lg"
-          />
-
-          <input
-            type="text"
-            placeholder="Category"
-            className="bg-slate-800 p-3 rounded-lg"
-          />
+          <button className="mt-4 bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-lg">
+            Create Event
+          </button>
 
         </div>
 
-        <textarea
-          placeholder="Event Description"
-          className="bg-slate-800 p-3 rounded-lg w-full mt-4 h-32"
-        />
+        <h2 className="text-3xl font-bold mb-6">
+          My Events
+        </h2>
 
-        <button className="mt-4 bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-lg">
-          Create Event
-        </button>
-      </div>
+        <div className="grid md:grid-cols-2 gap-6">
 
-      {/* My Events */}
+          {myEvents.map((event) => (
+            <div
+              key={event.id}
+              className="bg-slate-900 border border-slate-800 rounded-xl p-6 hover:border-blue-500 transition-all duration-300"
+            >
+              <h3 className="text-2xl font-semibold">
+                {event.title}
+              </h3>
 
-      <h2 className="text-3xl font-bold mb-6">
-        My Events
-      </h2>
+              <p className="mt-3 text-slate-400">
+                Status: {event.status}
+              </p>
+            </div>
+          ))}
 
-      <div className="grid md:grid-cols-2 gap-6">
-
-        {myEvents.map((event) => (
-          <div
-            key={event.id}
-            className="bg-slate-900 border border-slate-800 rounded-xl p-6"
-          >
-            <h3 className="text-2xl font-semibold">
-              {event.title}
-            </h3>
-
-            <p className="mt-2 text-slate-400">
-              Status: {event.status}
-            </p>
-          </div>
-        ))}
+        </div>
 
       </div>
 
