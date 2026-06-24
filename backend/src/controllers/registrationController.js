@@ -1,4 +1,5 @@
-import Event from "../models/Event.js";
+// import Event from "../models/Event.js";
+import Event from "../models/event.js";
 
 // POST /api/registrations/:eventId
 export const registerForEvent = async (req, res) => {
