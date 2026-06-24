@@ -1,17 +1,87 @@
-function Register() {
-  return (
-    <div className="min-h-screen bg-slate-950 flex items-center justify-center px-4">
-      <div className="w-full max-w-md bg-slate-900 border border-slate-800 rounded-2xl p-8 shadow-xl">
+import { useState } from "react";
+import api from "../services/api";
 
-        <h1 className="text-4xl font-bold text-center text-white mb-2">
-          Create Account
+function Register() {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+    role: "student",
+  });
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const res = await api.post("/auth/register", formData);
+
+      alert(res.data.message);
+
+      localStorage.setItem("token", res.data.token);
+
+      console.log(res.data);
+    } catch (err) {
+      alert(
+        err.response?.data?.message ||
+        "Registration Failed"
+      );
+    }
+  };
+
+return (
+  <div className="min-h-screen bg-gradient-to-br from-slate-950 via-blue-950 to-slate-950 text-white flex items-center justify-center px-6">
+
+    <div className="w-full max-w-6xl grid lg:grid-cols-2 gap-10">
+
+      {/* Left Side */}
+      <div className="hidden lg:flex flex-col justify-center">
+
+        <h1 className="text-6xl font-bold leading-tight">
+          Join
+          <span className="block bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+            EventSphere
+          </span>
         </h1>
 
-        <p className="text-slate-400 text-center mb-8">
-          Join EventSphere today
+        <p className="text-slate-400 text-xl mt-6">
+          Create events, manage registrations, track attendance
+          and generate certificates from one platform.
         </p>
 
-        <form className="space-y-5">
+        <div className="mt-10 bg-slate-900/60 backdrop-blur-xl border border-slate-800 rounded-3xl p-8 w-80">
+
+          <h3 className="text-2xl font-bold mb-2">
+            All-in-One Platform
+          </h3>
+
+          <p className="text-slate-400">
+            Designed for Students, Organizers and Admins to
+            manage college events seamlessly.
+          </p>
+
+        </div>
+
+      </div>
+
+      {/* Right Side Form */}
+      <div className="bg-slate-900/60 backdrop-blur-xl border border-slate-800 rounded-3xl p-8 shadow-2xl">
+
+        <h1 className="text-4xl font-bold mb-2">
+          Create Account ✨
+        </h1>
+
+        <p className="text-slate-400 mb-8">
+          Join EventSphere and start managing events.
+        </p>
+
+        <form onSubmit={handleSubmit} className="space-y-5">
 
           <div>
             <label className="block text-slate-300 mb-2">
@@ -20,20 +90,26 @@ function Register() {
 
             <input
               type="text"
+              name="name"
               placeholder="Enter your name"
-              className="w-full px-4 py-3 rounded-lg bg-slate-800 border border-slate-700 text-white focus:outline-none focus:border-blue-500"
+              value={formData.name}
+              onChange={handleChange}
+              className="w-full px-4 py-3 rounded-xl bg-slate-800 border border-slate-700 focus:border-blue-500 outline-none"
             />
           </div>
 
           <div>
             <label className="block text-slate-300 mb-2">
-              Email
+              Email Address
             </label>
 
             <input
               type="email"
-              placeholder="Enter your email"
-              className="w-full px-4 py-3 rounded-lg bg-slate-800 border border-slate-700 text-white focus:outline-none focus:border-blue-500"
+              name="email"
+              placeholder="you@example.com"
+              value={formData.email}
+              onChange={handleChange}
+              className="w-full px-4 py-3 rounded-xl bg-slate-800 border border-slate-700 focus:border-blue-500 outline-none"
             />
           </div>
 
@@ -44,8 +120,11 @@ function Register() {
 
             <input
               type="password"
-              placeholder="Create password"
-              className="w-full px-4 py-3 rounded-lg bg-slate-800 border border-slate-700 text-white focus:outline-none focus:border-blue-500"
+              name="password"
+              placeholder="Create a password"
+              value={formData.password}
+              onChange={handleChange}
+              className="w-full px-4 py-3 rounded-xl bg-slate-800 border border-slate-700 focus:border-blue-500 outline-none"
             />
           </div>
 
@@ -55,35 +134,34 @@ function Register() {
             </label>
 
             <select
-              className="w-full px-4 py-3 rounded-lg bg-slate-800 border border-slate-700 text-white focus:outline-none focus:border-blue-500"
+              name="role"
+              value={formData.role}
+              onChange={handleChange}
+              className="w-full px-4 py-3 rounded-xl bg-slate-800 border border-slate-700 focus:border-blue-500 outline-none"
             >
-              <option>Student</option>
-              <option>Organizer</option>
+              <option value="student">Student</option>
+              <option value="organizer">Organizer</option>
+              <option value="admin">Admin</option>
             </select>
           </div>
 
           <button
             type="submit"
-            className="w-full bg-blue-600 hover:bg-blue-700 transition py-3 rounded-lg text-white font-semibold"
+            className="w-full py-3 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 hover:scale-[1.02] transition"
           >
-            Register
+            Create Account
           </button>
 
         </form>
 
-        <p className="text-center text-slate-400 mt-6">
-          Already have an account?{" "}
-          <a
-            href="/login"
-            className="text-blue-500 hover:text-blue-400"
-          >
-            Login
-          </a>
-        </p>
-
       </div>
+
     </div>
-  );
+
+  </div>
+);
+
+
 }
 
 export default Register;
