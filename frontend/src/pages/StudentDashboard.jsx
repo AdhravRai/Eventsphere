@@ -1,5 +1,7 @@
+import { useState, useEffect } from "react";
 import Sidebar from "../components/Sidebar";
 import Topbar from "../components/Topbar";
+import api from "../services/api";
 
 import {
   FaCalendarAlt,
@@ -8,27 +10,48 @@ import {
   FaArrowRight,
 } from "react-icons/fa";
 function StudentDashboard() {
-  const events = [
-    {
-      id: 1,
-      title: "Hackathon 2026",
-      date: "25 June 2026",
-      venue: "Main Auditorium",
-    },
-    {
-      id: 2,
-      title: "AI Workshop",
-      date: "28 June 2026",
-      venue: "Seminar Hall",
-    },
-    {
-      id: 3,
-      title: "Coding Contest",
-      date: "30 June 2026",
-      venue: "Computer Lab",
-    },
-  ];
+  const [events, setEvents] = useState([]);
 
+useEffect(() => {
+  fetchEvents();
+}, []);
+
+const registerEvent = async (eventId) => {
+  try {
+    const token = localStorage.getItem("token");
+
+    const res = await api.post(
+      `/events/${eventId}/register`,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    alert(res.data.message);
+    fetchEvents();
+  } catch (err) {
+    alert(
+      err.response?.data?.message ||
+      "Registration failed"
+    );
+  }
+};
+
+const fetchEvents = async () => {
+  try {
+    const res = await api.get("/events");
+
+console.log("EVENTS FULL:", res.data);
+console.log("FIRST EVENT:", res.data[0]);
+
+setEvents(res.data);
+  } catch (err) {
+    console.log(err);
+  }
+};
  
 return (
   <div className="flex min-h-screen bg-gradient-to-br from-slate-950 via-blue-950 to-slate-950 text-white">
@@ -68,7 +91,7 @@ return (
             </p>
 
             <h2 className="text-4xl font-bold mt-2">
-              12
+             {events.length} 
             </h2>
 
           </div>
@@ -82,7 +105,15 @@ return (
             </p>
 
             <h2 className="text-4xl font-bold mt-2">
-              4
+              {
+  events.filter((event) =>
+    event.attendees?.some(
+      (attendee) =>
+        attendee.student?._id ===
+        JSON.parse(localStorage.getItem("user"))?.id
+    )
+  ).length
+}
             </h2>
 
           </div>
@@ -115,49 +146,49 @@ return (
           </button>
 
         </div>
-
+<h1 className="text-red-500 text-3xl mb-4">
+  {events.length} Events Found
+</h1>
         <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
+          {events.length === 0 && (
+  <div className="text-slate-400">
+    No approved events available.
+  </div>
+)}
+{events.map((event) => (
+  <div
+    key={event._id}
+    className="bg-slate-900/60 backdrop-blur-xl border border-slate-800 rounded-2xl p-6 hover:border-blue-500 hover:-translate-y-2 transition-all duration-300"
+  >
+    <div className="flex justify-between items-center mb-4">
+      <span className="px-3 py-1 rounded-full bg-blue-500/10 text-blue-400 text-sm">
+        Upcoming
+      </span>
+    </div>
 
-          {events.map((event) => (
-            <div
-              key={event.id}
-              className="bg-slate-900/60 backdrop-blur-xl border border-slate-800 rounded-2xl p-6 hover:border-blue-500 hover:-translate-y-2 transition-all duration-300"
-            >
+    <h3 className="text-2xl font-bold mb-4">
+      {event.title}
+    </h3>
 
-              <div className="flex justify-between items-center mb-4">
+    <div className="space-y-2 mb-6">
+      <p className="text-slate-400">
+        📅 {new Date(event.date).toLocaleDateString()}
+      </p>
 
-                <span className="px-3 py-1 rounded-full bg-blue-500/10 text-blue-400 text-sm">
-                  Upcoming
-                </span>
+      <p className="text-slate-400">
+        📍 {event.venue}
+      </p>
+    </div>
 
-              </div>
-
-              <h3 className="text-2xl font-bold mb-4">
-                {event.title}
-              </h3>
-
-              <div className="space-y-2 mb-6">
-
-                <p className="text-slate-400">
-                  📅 {event.date}
-                </p>
-
-                <p className="text-slate-400">
-                  📍 {event.venue}
-                </p>
-
-              </div>
-
-              <button className="w-full py-3 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 flex items-center justify-center gap-2 hover:scale-[1.02] transition">
-
-                Register
-
-                <FaArrowRight />
-
-              </button>
-
-            </div>
-          ))}
+    <button
+      onClick={() => registerEvent(event._id)}
+      className="w-full py-3 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 flex items-center justify-center gap-2 hover:scale-[1.02] transition"
+    >
+      Register
+      <FaArrowRight />
+    </button>
+  </div>
+))}
 
         </div>
 
