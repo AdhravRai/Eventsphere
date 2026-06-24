@@ -19,15 +19,23 @@ export const createEvent = async (req, res) => {
 
 
 // GET ALL EVENTS
+// export const getAllEvents = async (req, res) => {
+//   try {
+//     const events = await Event.find();
+
+//     res.status(200).json(events);
+//   } catch (error) {
+//     res.status(500).json({
+//       message: error.message,
+//     });
+//   }
+// };
 export const getAllEvents = async (req, res) => {
   try {
-    const events = await Event.find();
-
+    const events = await Event.find().populate("attendees.student", "name email");
     res.status(200).json(events);
   } catch (error) {
-    res.status(500).json({
-      message: error.message,
-    });
+    res.status(500).json({ message: error.message });
   }
 };
 
@@ -180,6 +188,14 @@ export const rejectEvent = async (req, res) => {
   }
 };
 
+// export const getPendingEvents = async (req, res) => {
+//   try {
+//     const events = await Event.find({ status: "Pending" });
+//     res.status(200).json(events);
+//   } catch (error) {
+//     res.status(500).json({ message: error.message });
+//   }
+// };
 export const getPendingEvents = async (req, res) => {
   try {
     const events = await Event.find({ status: "Pending" });
