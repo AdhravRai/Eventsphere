@@ -4,6 +4,8 @@ import Topbar from "../components/Topbar";
 import jsPDF from "jspdf";
 import { useState, useEffect } from "react";
 import api from "../services/api";
+import TopBar from "../components/TopBar";
+
 import {
   FaCertificate,
   FaDownload,
