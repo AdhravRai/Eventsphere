@@ -160,6 +160,44 @@ export const markAttendance = async (req, res) => {
 // };
 
 // Add approve/reject controller 
+export const registerForEvent = async (req, res) => {
+  try {
+    const event = await Event.findById(req.params.id);
+
+    if (!event) {
+      return res.status(404).json({
+        message: "Event not found",
+      });
+    }
+
+    const alreadyRegistered = event.attendees.some(
+      (attendee) =>
+        attendee.student.toString() === req.user.id
+    );
+
+    if (alreadyRegistered) {
+      return res.status(400).json({
+        message: "Already registered",
+      });
+    }
+
+    event.attendees.push({
+      student: req.user.id,
+      present: false,
+    });
+
+    await event.save();
+
+    res.status(200).json({
+      message: "Registration successful",
+      event,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: error.message,
+    });
+  }
+};
 export const approveEvent = async (req, res) => {
   try {
     const event = await Event.findByIdAndUpdate(

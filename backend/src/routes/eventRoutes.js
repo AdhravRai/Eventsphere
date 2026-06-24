@@ -11,6 +11,7 @@ import {
   rejectEvent,
   getPendingEvents,
   markAttendance,
+  registerForEvent,
 } from "../controllers/eventController.js";
 
 const router = express.Router();
@@ -27,6 +28,9 @@ router.delete("/:id", protect, deleteEvent);
 
 router.put("/:id/approve", protect, isAdmin, approveEvent);
 router.put("/:id/reject", protect, isAdmin, rejectEvent);
+
+router.post("/:id/register", protect, registerForEvent);
+
 router.put("/:id/attendance", protect, isAdmin, markAttendance);
 
 export default router;
