@@ -11,40 +11,43 @@ import {
 
 function Home() {
   return (
-<div className="min-h-screen text-white overflow-hidden bg-gradient-to-br from-slate-950 via-blue-950 to-slate-950">
+    <div className="min-h-screen text-white overflow-hidden bg-gradient-to-br from-slate-950 via-blue-950 to-slate-950">
 
-      {/* Navbar */}
-      <nav className="sticky top-0 z-50 backdrop-blur-lg bg-slate-950/70 border-b border-slate-800 flex justify-between items-center px-10 py-6">
+     {/* Navbar */}
+<nav className="sticky top-0 z-50 backdrop-blur-lg bg-slate-950/70 border-b border-slate-800 flex justify-between items-center px-10 py-5">
 
-        <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
-          EventSphere
-        </h1>
+  {/* Logo */}
+  <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+    EventSphere
+  </h1>
 
-        <div className="flex gap-6">
+  {/* Navigation */}
+  <div className="flex items-center gap-6">
 
-          <Link
-            to="/"
-            className="hover:text-blue-400 transition"
-          >
-            Home
-          </Link>
+    <Link
+      to="/"
+      className="inline-flex items-center h-11 text-white hover:text-blue-400 transition"
+    >
+      Home
+    </Link>
 
-         <Link
-  to="/login"
-  className="px-5 py-2 border border-slate-700 rounded-xl hover:border-blue-500 transition"
->
-  Login
-</Link>
+    <Link
+      to="/login"
+      className="inline-flex items-center justify-center h-11 px-6 border border-slate-700 rounded-xl hover:border-blue-500 transition-all"
+    >
+      Login
+    </Link>
 
-<Link
-  to="/register"
-  className="px-5 py-2 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 hover:scale-105 transition"
->
-  Register
-</Link>
+    <Link
+      to="/register"
+      className="inline-flex items-center justify-center h-11 px-6 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 hover:scale-105 transition-all duration-300"
+    >
+      Register
+    </Link>
 
-        </div>
-      </nav>
+  </div>
+
+</nav>
 
       {/* Hero Section */}
       <section className="relative">
