@@ -87,16 +87,21 @@ function Home() {
 
             <div className="flex gap-4 mt-10">
 
-              <button className="px-8 py-4 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 hover:scale-105 transition duration-300">
-                Get Started
-              </button>
+  <Link
+    to="/register"
+    className="px-8 py-4 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 hover:scale-105 transition duration-300 inline-block"
+  >
+    Get Started
+  </Link>
 
-              <button className="px-8 py-4 rounded-xl border border-slate-700 hover:border-blue-500 transition">
-                Explore Events
-              </button>
+  <Link
+    to="/login"
+    className="px-8 py-4 rounded-xl border border-slate-700 hover:border-blue-500 transition inline-block"
+  >
+    Explore Events
+  </Link>
 
-            </div>
-
+</div>
           </div>
 
           {/* Dashboard Preview */}
