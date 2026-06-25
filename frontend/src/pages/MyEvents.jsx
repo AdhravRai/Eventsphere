@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
 import TopBar from "../components/TopBar";
 import api from "../services/api";
@@ -131,10 +132,13 @@ function MyEvents() {
                     📍 {event.venue}
                   </p>
 
-                  <button className="w-full py-3 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 flex items-center justify-center gap-2">
+                  <Link
+                    to={`/event/${event._id}`}
+                    className="w-full py-3 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 flex items-center justify-center gap-2 hover:scale-[1.02] transition"
+                  >
                     View Details
                     <FaArrowRight />
-                  </button>
+                  </Link>
 
                 </div>
               ))

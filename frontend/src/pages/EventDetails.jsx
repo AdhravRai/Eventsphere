@@ -1,4 +1,6 @@
-
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import api from "../services/api";
 import {
   FaCalendarAlt,
   FaMapMarkerAlt,
@@ -7,6 +9,30 @@ import {
 } from "react-icons/fa";
 
 function EventDetails() {
+  const { id } = useParams();
+
+const [event, setEvent] = useState(null);
+useEffect(() => {
+  fetchEvent();
+}, []);
+
+const fetchEvent = async () => {
+  try {
+    const res = await api.get(`/events/${id}`);
+    setEvent(res.data);
+  } catch (err) {
+    console.log(err);
+  }
+};
+if (!event) {
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-blue-950 to-slate-950 flex items-center justify-center text-white">
+      <div className="animate-pulse text-2xl font-semibold">
+        Loading Event...
+      </div>
+    </div>
+  );
+}
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-blue-950 to-slate-950 text-white p-8">
 
@@ -20,14 +46,12 @@ function EventDetails() {
         </span>
 
         <h1 className="text-6xl font-bold mb-4">
-          Hackathon 2026 🚀
-        </h1>
+  {event.title}
+</h1>
 
         <p className="text-slate-400 text-xl max-w-3xl">
-          Join the biggest hackathon of the year and compete with talented
-          developers, designers and innovators from across the campus.
-        </p>
-
+  {event.description}
+</p>
       </div>
 
       {/* Stats */}
@@ -37,24 +61,24 @@ function EventDetails() {
           <FaCalendarAlt className="text-blue-400 text-3xl mb-4" />
           <p className="text-slate-400">Event Date</p>
           <h2 className="text-2xl font-bold">
-            25 June 2026
-          </h2>
+  {new Date(event.date).toLocaleDateString()}
+</h2>
         </div>
 
         <div className="bg-slate-900/60 backdrop-blur-xl border border-slate-800 rounded-2xl p-6">
           <FaMapMarkerAlt className="text-red-400 text-3xl mb-4" />
           <p className="text-slate-400">Venue</p>
           <h2 className="text-2xl font-bold">
-            Main Auditorium
-          </h2>
+  {event.venue}
+</h2>
         </div>
 
         <div className="bg-slate-900/60 backdrop-blur-xl border border-slate-800 rounded-2xl p-6">
           <FaUsers className="text-purple-400 text-3xl mb-4" />
           <p className="text-slate-400">Organizer</p>
           <h2 className="text-2xl font-bold">
-            CS Club
-          </h2>
+  {event.category}
+</h2>
         </div>
 
       </div>
@@ -67,12 +91,41 @@ function EventDetails() {
         </h2>
 
         <p className="text-slate-400 leading-relaxed text-lg mb-8">
-          Hackathon 2026 is a 24-hour innovation challenge where students
-          collaborate, build solutions and present their projects to judges.
-          Participants will gain practical experience, networking opportunities,
-          certificates and exciting prizes.
-        </p>
+  {event.description}
+  <div className="grid md:grid-cols-2 gap-4 mb-8 text-slate-300">
 
+  <p>
+    📅 <span className="font-semibold">Date:</span>{" "}
+    {new Date(event.date).toLocaleDateString()}
+  </p>
+
+  <p>
+    📍 <span className="font-semibold">Venue:</span>{" "}
+    {event.venue}
+  </p>
+
+  <p>
+    🏷️ <span className="font-semibold">Category:</span>{" "}
+    {event.category}
+  </p>
+
+  <p>
+    👥 <span className="font-semibold">Capacity:</span>{" "}
+    {event.capacity}
+  </p>
+
+  <p>
+    ✅ <span className="font-semibold">Status:</span>{" "}
+    {event.status}
+  </p>
+
+  <p>
+    👤 <span className="font-semibold">Registered:</span>{" "}
+    {event.attendees?.length || 0}
+  </p>
+
+</div>
+</p>
         <div className="flex flex-wrap gap-4">
 
           <button className="px-8 py-4 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 flex items-center gap-2 hover:scale-[1.02] transition">

@@ -3,7 +3,7 @@ import {
   FaSearch,
 } from "react-icons/fa";
 
-function Topbar() {
+function TopBar() {
     console.log("TOPBAR USER:", JSON.parse(localStorage.getItem("user")));
   const user =
     JSON.parse(localStorage.getItem("user")) || {};
@@ -74,4 +74,4 @@ function Topbar() {
   );
 }
 
-export default Topbar;
+export default TopBar;
