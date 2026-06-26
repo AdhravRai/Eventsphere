@@ -35,8 +35,10 @@ function Events() {
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-blue-950 to-slate-950 text-white">
 
       <div className="max-w-7xl mx-auto p-10">
-        <BackButton />
-
+        
+<div className="mb-8">
+  <BackButton />
+</div>
         <h1 className="text-5xl font-bold mb-3">
           Upcoming Events
         </h1>
