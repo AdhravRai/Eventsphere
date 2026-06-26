@@ -1,5 +1,6 @@
 import { useState } from "react";
 import api from "../services/api";
+import BackButton from "../components/BackButton";
 
 function Register() {
   const [formData, setFormData] = useState({
@@ -37,6 +38,7 @@ function Register() {
 
 return (
   <div className="min-h-screen bg-gradient-to-br from-slate-950 via-blue-950 to-slate-950 text-white flex items-center justify-center px-6">
+    <BackButton />
 
     <div className="w-full max-w-6xl grid lg:grid-cols-2 gap-10">
 

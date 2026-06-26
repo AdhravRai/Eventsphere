@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaShieldAlt, FaGoogle } from "react-icons/fa";
 import api from "../services/api";
+import BackButton from "../components/BackButton";
 
 function Login() {
   const navigate = useNavigate();
@@ -52,6 +53,7 @@ function Login() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-blue-950 to-slate-950 text-white flex items-center justify-center px-6">
+      <BackButton />
 
       <div className="w-full max-w-6xl grid lg:grid-cols-2 gap-10">
 

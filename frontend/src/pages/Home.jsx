@@ -7,50 +7,54 @@ import {
   FaUsers,
   FaCertificate,
   FaChartLine,
+  FaEnvelope,
+  FaPhoneAlt,
+  FaMapMarkerAlt,
+  FaGithub,
 } from "react-icons/fa";
 
 function Home() {
   return (
     <div className="min-h-screen text-white overflow-hidden bg-gradient-to-br from-slate-950 via-blue-950 to-slate-950">
 
-     {/* Navbar */}
-<nav className="sticky top-0 z-50 backdrop-blur-lg bg-slate-950/70 border-b border-slate-800 flex justify-between items-center px-10 py-5">
+      {/* Navbar */}
+      <nav className="sticky top-0 z-50 backdrop-blur-lg bg-slate-950/70 border-b border-slate-800 flex justify-between items-center px-10 py-5">
 
-  {/* Logo */}
-  <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
-    EventSphere
-  </h1>
+        {/* Logo */}
+        <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+          EventSphere
+        </h1>
 
-  {/* Navigation */}
-  <div className="flex items-center gap-6">
+        {/* Navigation */}
+        <div className="flex items-center gap-6">
 
-    <Link
-      to="/"
-      className="inline-flex items-center h-11 text-white hover:text-blue-400 transition"
-    >
-      Home
-    </Link>
+          <Link
+            to="/"
+            className="inline-flex items-center h-11 text-white hover:text-blue-400 transition"
+          >
+            Home
+          </Link>
 
-    <Link
-      to="/login"
-      className="inline-flex items-center justify-center h-11 px-6 border border-slate-700 rounded-xl hover:border-blue-500 transition-all"
-    >
-      Login
-    </Link>
+          <Link
+            to="/login"
+            className="inline-flex items-center justify-center h-11 px-6 border border-slate-700 rounded-xl hover:border-blue-500 transition-all"
+          >
+            Login
+          </Link>
 
-    <Link
-      to="/register"
-      className="inline-flex items-center justify-center h-11 px-6 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 hover:scale-105 transition-all duration-300"
-    >
-      Register
-    </Link>
+          <Link
+            to="/register"
+            className="inline-flex items-center justify-center h-11 px-6 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 hover:scale-105 transition-all duration-300"
+          >
+            Register
+          </Link>
 
-  </div>
+        </div>
 
-</nav>
+      </nav>
 
       {/* Hero Section */}
-      <section className="relative">
+      <section id="about" className="relative">
 
         {/* Background Glow */}
         <div className="absolute top-20 left-20 w-72 h-72 bg-blue-600/20 blur-[120px]" />
@@ -87,21 +91,20 @@ function Home() {
 
             <div className="flex gap-4 mt-10">
 
-  <Link
-    to="/register"
-    className="px-8 py-4 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 hover:scale-105 transition duration-300 inline-block"
-  >
-    Get Started
-  </Link>
+              <Link
+                to="/register"
+                className="px-8 py-4 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 hover:scale-105 transition duration-300 inline-block"
+              >
+                Get Started
+              </Link>
 
-  <Link
-    to="/login"
-    className="px-8 py-4 rounded-xl border border-slate-700 hover:border-blue-500 transition inline-block"
-  >
-    Explore Events
-  </Link>
-
-</div>
+              <Link
+                to="/events"
+                className="px-8 py-4 rounded-xl border border-slate-700 hover:border-blue-500 transition inline-block"
+              >
+                Explore Events
+              </Link>
+            </div>
           </div>
 
           {/* Dashboard Preview */}
@@ -145,6 +148,7 @@ function Home() {
       </section>
 
       {/* Statistics */}
+
       <section className="px-10 pb-20">
 
         <div className="grid md:grid-cols-4 gap-6">
@@ -190,7 +194,8 @@ function Home() {
       </section>
 
       {/* Features */}
-      <section className="px-10 pb-20">
+
+      <section id="features" className="px-10 pb-20">
 
         <h2 className="text-5xl font-bold text-center mb-12">
           Features
@@ -236,6 +241,106 @@ function Home() {
             <p className="text-slate-400">
               Generate participation certificates instantly.
             </p>
+          </div>
+
+        </div>
+
+      </section>
+      <div className="max-w-7xl mx-auto px-10 pb-16">
+        <div className="border-t border-slate-800"></div>
+      </div>
+      {/* Contact Section */}
+      <section
+        id="contact"
+        className="px-10 pb-24"
+      >
+
+        <div className="max-w-7xl mx-auto">
+
+          <div className="bg-slate-900/60 backdrop-blur-xl border border-slate-800 rounded-3xl p-10">
+
+            <h2 className="text-5xl font-bold text-center mb-4">
+              Contact Us
+            </h2>
+
+            <p className="text-center text-slate-400 mb-12">
+              Have questions or suggestions? We'd love to hear from you.
+            </p>
+
+            <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-8">
+
+              {/* Email */}
+              <div className="bg-slate-800 rounded-2xl p-8 text-center hover:border hover:border-blue-500 transition-all duration-300">
+
+                <div className="text-5xl mb-4">
+                  <FaEnvelope className="text-5xl text-blue-400 mx-auto mb-5" />
+                </div>
+
+                <h3 className="text-2xl font-bold mb-3">
+                  Email
+                </h3>
+
+                <p className="text-slate-400">
+                  eventsphere.team@gmail.com
+                </p>
+
+              </div>
+
+              {/* Phone */}
+              <div className="bg-slate-800 rounded-2xl p-8 text-center hover:border hover:border-purple-500 transition-all duration-300">
+
+                <div className="text-5xl mb-4">
+                  <FaPhoneAlt className="text-5xl text-purple-400 mx-auto mb-5" />
+                </div>
+
+                <h3 className="text-2xl font-bold mb-3">
+                  Phone
+                </h3>
+
+                <p className="text-slate-400">
+                  +91 XXXXX XXXXX
+                </p>
+
+              </div>
+
+              {/* Address */}
+              <div className="bg-slate-800 rounded-2xl p-8 text-center hover:border hover:border-green-500 transition-all duration-300">
+
+                <div className="text-5xl mb-4">
+                  <FaMapMarkerAlt className="text-5xl text-green-400 mx-auto mb-5" />
+                </div>
+
+                <h3 className="text-2xl font-bold mb-3">
+                  Address
+                </h3>
+
+                <p className="text-slate-400">
+
+                  Malaviya University of Technology, Gorakhpur, Uttar Pradesh, India
+                </p>
+
+              </div>
+              <div className="bg-slate-800 rounded-2xl p-8 text-center hover:border hover:border-blue-500 hover:-translate-y-2 transition-all duration-300">
+
+                <FaGithub className="text-5xl text-white mx-auto mb-5" />
+
+                <h3 className="text-2xl font-bold mb-3">
+                  GitHub
+                </h3>
+
+                <a
+                  href="https://github.com/AdhravRai/Eventsphere"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-blue-400 hover:underline"
+                >
+                  View Repository
+                </a>
+
+              </div>
+
+            </div>
+
           </div>
 
         </div>

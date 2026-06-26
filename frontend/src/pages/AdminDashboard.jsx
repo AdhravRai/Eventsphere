@@ -145,6 +145,7 @@ function AdminDashboard() {
         <Topbar />
 
         <div className="p-8">
+          
           {/* Dashboard Hero */}
           <div className="bg-slate-900/60 backdrop-blur-xl border border-slate-800 rounded-3xl p-8 mb-10">
             <h1 className="text-5xl font-bold mb-3">Admin Control Center ⚡</h1>

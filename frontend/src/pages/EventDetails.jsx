@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import api from "../services/api";
+import BackButton from "../components/BackButton";
 import {
   FaCalendarAlt,
   FaMapMarkerAlt,
@@ -35,6 +36,7 @@ if (!event) {
 }
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-blue-950 to-slate-950 text-white p-8">
+      <BackButton />
 
       {/* Hero Section */}
       <div className="relative overflow-hidden rounded-3xl border border-slate-800 bg-slate-900/60 backdrop-blur-xl p-10 mb-10">

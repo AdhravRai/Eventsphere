@@ -3,6 +3,7 @@ import EventDetails from "./pages/EventDetails";
 import MyEvents from "./pages/MyEvents";
 import Attendance from "./pages/Attendance";
 import Certificates from "./pages/Certificates";
+import Events from "./pages/Events";
 
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -22,6 +23,7 @@ function App() {
         <Route path="/organizer-dashboard" element={<OrganizerDashboard />} />
         <Route path="/admin-dashboard" element={<AdminDashboard />} />
         <Route path="/event/:id" element={<EventDetails />} />
+        <Route path="/events" element={<Events />} />
         <Route path="/my-events" element={<MyEvents />} />
         <Route path="/attendance" element={<Attendance />} />
         <Route path="/certificates" element={<Certificates />} />

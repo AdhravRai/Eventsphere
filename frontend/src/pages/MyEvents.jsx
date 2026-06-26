@@ -4,6 +4,7 @@ import Sidebar from "../components/Sidebar";
 import TopBar from "../components/TopBar";
 import api from "../services/api";
 
+
 import {
   FaCheckCircle,
   FaCalendarAlt,
@@ -49,6 +50,7 @@ function MyEvents() {
         <TopBar />
 
         <div className="p-8">
+          
 
           {/* Hero Section */}
           <div className="bg-slate-900/60 backdrop-blur-xl border border-slate-800 rounded-3xl p-8 mb-10">

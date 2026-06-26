@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import Sidebar from "../components/Sidebar";
 import TopBar from "../components/TopBar";
 import api from "../services/api";
+
 import {
   FaCalendarPlus,
   FaCheckCircle,
@@ -128,6 +129,7 @@ function OrganizerDashboard() {
         <TopBar />
 
         <div className="p-8">
+          
 
           {/* Header */}
           <div className="bg-slate-900/60 backdrop-blur-xl border border-slate-800 rounded-3xl p-8 mb-10">
