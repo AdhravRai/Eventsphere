@@ -29,7 +29,7 @@ const userSchema = new mongoose.Schema(
     subscription: {
       plan: {
         type: String,
-        enum: ["Free", "Premium"],
+        enum: ["Free", "Gold", "Premium"],
         default: "Free",
       },
       verifiedAt: {

@@ -58,10 +58,10 @@ export const verifyPayment = async (req, res) => {
     await payment.save();
 
     // If it's a subscription payment, upgrade the user's plan
-    if (payment.type === "Subscription" && payment.plan === "Premium") {
+    if (payment.type === "Subscription" && (payment.plan === "Gold" || payment.plan === "Premium")) {
       await User.findByIdAndUpdate(payment.user, {
         subscription: {
-          plan: "Premium",
+          plan: payment.plan,
           verifiedAt: new Date(),
         },
       });

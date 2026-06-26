@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaShieldAlt, FaGoogle } from "react-icons/fa";
@@ -37,17 +36,14 @@ function Login() {
       alert("Login Successful");
 
       if (res.data.user.role === "student") {
-        navigate("/student-dashboard");
+        navigate("/subscription");
       } else if (res.data.user.role === "organizer") {
         navigate("/organizer-dashboard");
       } else if (res.data.user.role === "admin") {
         navigate("/admin-dashboard");
       }
     } catch (err) {
-      alert(
-        err.response?.data?.message ||
-          "Login Failed"
-      );
+      alert(err.response?.data?.message || "Login Failed");
     }
   };
 
@@ -56,10 +52,8 @@ function Login() {
       <BackButton />
 
       <div className="w-full max-w-6xl grid lg:grid-cols-2 gap-10">
-
         {/* Left Side */}
         <div className="hidden lg:flex flex-col justify-center">
-
           <h1 className="text-6xl font-bold leading-tight">
             Welcome Back to
             <span className="block bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
@@ -68,40 +62,31 @@ function Login() {
           </h1>
 
           <p className="text-slate-400 text-xl mt-6">
-            Manage registrations, attendance and certificates
-            from a single platform.
+            Manage registrations, attendance and certificates from a single
+            platform.
           </p>
 
           <div className="mt-10 bg-slate-900/60 backdrop-blur-xl border border-slate-800 rounded-3xl p-8 w-80">
             <FaShieldAlt className="text-blue-400 text-5xl mb-4" />
-            <h3 className="text-2xl font-bold mb-2">
-              Secure Access
-            </h3>
+            <h3 className="text-2xl font-bold mb-2">Secure Access</h3>
             <p className="text-slate-400">
-              Your data is protected with modern authentication
-              and role-based access.
+              Your data is protected with modern authentication and role-based
+              access.
             </p>
           </div>
-
         </div>
 
         {/* Right Side */}
         <div className="bg-slate-900/60 backdrop-blur-xl border border-slate-800 rounded-3xl p-8 shadow-2xl">
-
-          <h1 className="text-4xl font-bold mb-2">
-            Welcome Back 👋
-          </h1>
+          <h1 className="text-4xl font-bold mb-2">Welcome Back 👋</h1>
 
           <p className="text-slate-400 mb-8">
             Login to continue managing your events.
           </p>
 
           <form onSubmit={handleSubmit} className="space-y-5">
-
             <div>
-              <label className="block text-slate-300 mb-2">
-                Email Address
-              </label>
+              <label className="block text-slate-300 mb-2">Email Address</label>
 
               <input
                 type="email"
@@ -114,9 +99,7 @@ function Login() {
             </div>
 
             <div>
-              <label className="block text-slate-300 mb-2">
-                Password
-              </label>
+              <label className="block text-slate-300 mb-2">Password</label>
 
               <input
                 type="password"
@@ -129,9 +112,7 @@ function Login() {
             </div>
 
             <div>
-              <label className="block text-slate-300 mb-2">
-                Role
-              </label>
+              <label className="block text-slate-300 mb-2">Role</label>
 
               <select
                 name="role"
@@ -166,26 +147,18 @@ function Login() {
               <FaGoogle />
               Login with Google
             </button>
-
           </form>
 
           <p className="text-center text-slate-400 mt-8">
             Don't have an account?{" "}
-            <Link
-              to="/register"
-              className="text-blue-400 hover:text-blue-300"
-            >
+            <Link to="/register" className="text-blue-400 hover:text-blue-300">
               Register
             </Link>
           </p>
-
         </div>
-
       </div>
-
     </div>
   );
 }
 
 export default Login;
-

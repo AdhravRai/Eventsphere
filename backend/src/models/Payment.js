@@ -19,8 +19,8 @@ const paymentSchema = new mongoose.Schema(
     },
     plan: {
       type: String,
-      enum: ["Premium"],
-      default: null, // only used when type === "Subscription"
+      enum: ["Gold", "Premium"],
+      default: null,
     },
     amount: {
       type: Number,

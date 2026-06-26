@@ -1,6 +1,6 @@
 
 import Sidebar from "../components/Sidebar";
-import Topbar from "../components/Topbar";
+// import Topbar from "../components/Topbar";
 import jsPDF from "jspdf";
 import { useState, useEffect } from "react";
 import api from "../services/api";
