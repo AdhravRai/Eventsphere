@@ -1,10 +1,12 @@
 import { Link } from "react-router-dom";
-
 import {
   FaHome,
   FaUserGraduate,
   FaUserTie,
   FaUserShield,
+  FaCertificate,
+  FaClipboardCheck,
+  FaCalendarAlt,
 } from "react-icons/fa";
 
 function Sidebar() {
@@ -61,6 +63,29 @@ function Sidebar() {
           <FaUserShield />
           Admin Dashboard
         </Link>
+        <Link
+  to="/my-events"
+  className="flex items-center gap-3 p-4 rounded-xl text-slate-300 hover:bg-blue-500/10 hover:text-blue-400 transition"
+>
+  <FaCalendarAlt />
+  My Events
+</Link>
+
+<Link
+  to="/attendance"
+  className="flex items-center gap-3 p-4 rounded-xl text-slate-300 hover:bg-blue-500/10 hover:text-blue-400 transition"
+>
+  <FaClipboardCheck />
+  Attendance
+</Link>
+
+<Link
+  to="/certificates"
+  className="flex items-center gap-3 p-4 rounded-xl text-slate-300 hover:bg-blue-500/10 hover:text-blue-400 transition"
+>
+  <FaCertificate />
+  Certificates
+</Link>
 
       </div>
 

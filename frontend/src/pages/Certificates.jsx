@@ -1,5 +1,9 @@
 
 import Sidebar from "../components/Sidebar";
+import Topbar from "../components/Topbar";
+import jsPDF from "jspdf";
+import { useState, useEffect } from "react";
+import api from "../services/api";
 import TopBar from "../components/TopBar";
 
 import {
@@ -9,47 +13,145 @@ import {
 } from "react-icons/fa";
 
 function Certificates() {
-  const certificates = [
-    {
-      id: 1,
-      event: "Hackathon 2026",
-      date: "25 June 2026",
-    },
-    {
-      id: 2,
-      event: "AI Workshop",
-      date: "28 June 2026",
-    },
-  ];
+
+  const [certificates, setCertificates] = useState([]);
+
+  const currentUser = JSON.parse(
+    localStorage.getItem("user")
+  );
+  useEffect(() => {
+    fetchCertificates();
+    
+  }, []);
+
+  const fetchCertificates = async () => {
+  try {
+    const res = await api.get("/events");
+
+    const userCertificates = res.data.filter(
+      (event) =>
+        event.attendees?.some(
+          (attendee) =>
+            attendee.student?._id === currentUser?.id
+        )
+    );
+
+    console.log("FILTERED CERTIFICATES:", userCertificates);
+
+    setCertificates(userCertificates);
+  } catch (error) {
+    console.log(error);
+  }
+};
+  
   const downloadCertificate = (eventName) => {
-    const user = JSON.parse(localStorage.getItem("user"));
+  const user = JSON.parse(localStorage.getItem("user"));
 
-    const doc = new jsPDF();
+  const doc = new jsPDF("landscape");
 
-    doc.setFontSize(22);
-    doc.text("Certificate of Participation", 35, 40);
+  // Background
+  doc.setFillColor(10, 15, 30);
+  doc.rect(0, 0, 297, 210, "F");
 
-    doc.setFontSize(14);
-    doc.text(
-      `This certifies that ${user?.name || "Student"}`,
-      20,
-      70
-    );
+  // Double Border
+  doc.setDrawColor(59, 130, 246);
+  doc.setLineWidth(2);
+  doc.rect(10, 10, 277, 190);
 
-    doc.text(
-      `successfully participated in ${eventName}`,
-      20,
-      90
-    );
+  doc.setDrawColor(245, 158, 11);
+  doc.setLineWidth(1);
+  doc.rect(15, 15, 267, 180);
 
-    doc.text(
-      "Issued by EventSphere",
-      20,
-      120
-    );
+  // Logo Circle
+  doc.setFillColor(59, 130, 246);
+  doc.circle(148.5, 35, 10, "F");
 
-    doc.save(`${eventName}-certificate.pdf`);
-  };
+  doc.setTextColor(255, 255, 255);
+  doc.setFontSize(20);
+  doc.text("E", 148.5, 38, { align: "center" });
+
+  // EventSphere Title
+  doc.setFontSize(32);
+  doc.setTextColor(255, 255, 255);
+  doc.text("EVENTSPHERE", 148.5, 60, {
+    align: "center",
+  });
+
+  // Certificate Title
+  doc.setFontSize(38);
+  doc.setTextColor(245, 158, 11);
+  doc.text("CERTIFICATE", 148.5, 85, {
+    align: "center",
+  });
+
+  doc.setFontSize(18);
+  doc.setTextColor(255, 255, 255);
+  doc.text("OF PARTICIPATION", 148.5, 95, {
+    align: "center",
+  });
+
+  // Content
+  doc.setFontSize(16);
+  doc.text("This certifies that", 148.5, 115, {
+    align: "center",
+  });
+
+  doc.setFontSize(28);
+  doc.setTextColor(245, 158, 11);
+  doc.text(
+    user?.name || "Student",
+    148.5,
+    135,
+    { align: "center" }
+  );
+
+  doc.setFontSize(16);
+  doc.setTextColor(255, 255, 255);
+  doc.text(
+    "has successfully participated in",
+    148.5,
+    150,
+    { align: "center" }
+  );
+
+  doc.setFontSize(24);
+  doc.setTextColor(59, 130, 246);
+  doc.text(eventName, 148.5, 170, {
+    align: "center",
+  });
+
+  // Date
+  doc.setFontSize(14);
+  doc.setTextColor(255, 255, 255);
+  doc.text(
+    `Date: ${new Date().toLocaleDateString()}`,
+    148.5,
+    185,
+    { align: "center" }
+  );
+
+  // Signatures
+  doc.line(40, 190, 80, 190);
+  doc.line(215, 190, 255, 190);
+
+  doc.setFontSize(12);
+  doc.text(
+    "Organizer Signature",
+    60,
+    197,
+    { align: "center" }
+  );
+
+  doc.text(
+    "EventSphere",
+    235,
+    197,
+    { align: "center" }
+  );
+
+  doc.save(`${eventName}-certificate.pdf`);
+};
+  
   return (
     <div className="flex min-h-screen bg-gradient-to-br from-slate-950 via-blue-950 to-slate-950 text-white">
 
@@ -86,7 +188,7 @@ function Certificates() {
               </p>
 
               <h2 className="text-4xl font-bold">
-                2
+                {certificates.length}
               </h2>
 
             </div>
@@ -122,27 +224,35 @@ function Certificates() {
           </div>
 
           {/* Certificate Cards */}
+          {/* Certificate Cards */}
+
+          {certificates.length === 0 && (
+            <p className="text-slate-400 mb-6">
+              No certificates earned yet.
+            </p>
+          )}
+
           <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
 
             {certificates.map((certificate) => (
               <div
-                key={certificate.id}
+                key={certificate._id}
                 className="bg-slate-900/60 backdrop-blur-xl border border-slate-800 rounded-2xl p-6 hover:border-blue-500 hover:-translate-y-2 transition-all duration-300"
               >
 
                 <FaCertificate className="text-yellow-400 text-5xl mb-4" />
 
                 <h3 className="text-2xl font-bold mb-2">
-                  {certificate.event}
+                  {certificate.title}
                 </h3>
 
                 <p className="text-slate-400 mb-6">
-                  Issued on {certificate.date}
+                  Issued on {new Date(certificate.date).toLocaleDateString()}
                 </p>
 
                 <button
                   onClick={() =>
-                    downloadCertificate(certificate.event)
+                    downloadCertificate(certificate.title)
                   }
                   className="w-full py-3 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 flex items-center justify-center gap-2 hover:scale-[1.02] transition"
                 >
@@ -163,7 +273,7 @@ function Certificates() {
 
     </div>
   );
-}
 
+}
 export default Certificates;
 
