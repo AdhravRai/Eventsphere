@@ -26,6 +26,17 @@ const userSchema = new mongoose.Schema(
       enum: ["student", "organizer", "admin"],
       default: "student",
     },
+    subscription: {
+      plan: {
+        type: String,
+        enum: ["Free", "Premium"],
+        default: "Free",
+      },
+      verifiedAt: {
+        type: Date,
+        default: null,
+      },
+    },
   },
   {
     timestamps: true,
