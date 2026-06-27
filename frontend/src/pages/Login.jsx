@@ -38,8 +38,8 @@ function Login() {
       if (res.data.user.role === "student") {
         navigate("/subscription");
       } else if (res.data.user.role === "organizer") {
-        navigate("/organizer-dashboard");
-      } else if (res.data.user.role === "admin") {
+  navigate("/organizer-subscription");
+} else if (res.data.user.role === "admin") {
         navigate("/admin-dashboard");
       }
     } catch (err) {

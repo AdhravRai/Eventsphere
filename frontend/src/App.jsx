@@ -6,6 +6,7 @@ import Certificates from "./pages/Certificates";
 import Events from "./pages/Events";
 import SubscriptionPlans from "./pages/SubscriptionPlans";
 import PaymentScreen from "./pages/PaymentScreen";
+import OrganizerSubscriptionPlans from "./pages/OrganizerSubscriptionPlans";
 
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -31,6 +32,7 @@ function App() {
         <Route path="/certificates" element={<Certificates />} />
         <Route path="/subscription" element={<SubscriptionPlans />} />
 <Route path="/subscription/payment" element={<PaymentScreen />} />
+<Route path="/organizer-subscription" element={<OrganizerSubscriptionPlans />} />
       </Routes>
     </BrowserRouter>
   );
