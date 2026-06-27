@@ -44,16 +44,23 @@ function Login() {
       }
     } catch (err) {
       alert(err.response?.data?.message || "Login Failed");
+      alert(
+        err.response?.data?.message ||
+        "Login Failed"
+      );
     }
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-blue-950 to-slate-950 text-white flex items-center justify-center px-6">
-      <BackButton />
+
 
       <div className="w-full max-w-6xl grid lg:grid-cols-2 gap-10">
         {/* Left Side */}
         <div className="hidden lg:flex flex-col justify-center">
+          <div className="mb-6">
+            <BackButton />
+          </div>
           <h1 className="text-6xl font-bold leading-tight">
             Welcome Back to
             <span className="block bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">

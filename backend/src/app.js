@@ -7,12 +7,27 @@ import paymentRoutes from "./routes/paymentRoutes.js";
 
 const app = express();
 
-app.use(cors());
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5173",
+      "https://eventsphere-gamma.vercel.app",
+    ],
+    credentials: true,
+  })
+);
 app.use(express.json());
 
 app.use("/api/auth", authRoutes);
 app.use("/api/events", eventRoutes);
 app.use("/api/registrations", registrationRoutes);
 app.use("/api/payments", paymentRoutes);
+
+app.get("/", (req, res) => {
+  res.json({
+    success: true,
+    message: "EventSphere Backend is Running 🚀"
+  });
+});
 
 export default app;
