@@ -15,4 +15,11 @@ app.use("/api/events", eventRoutes);
 app.use("/api/registrations", registrationRoutes);
 app.use("/api/payments", paymentRoutes);
 
+app.get("/", (req, res) => {
+  res.json({
+    success: true,
+    message: "EventSphere Backend is Running 🚀"
+  });
+});
+
 export default app;
